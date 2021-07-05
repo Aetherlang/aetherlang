@@ -1,0 +1,16 @@
+use :base
+use :io
+
+aether.x = 0
+t = timepoint void
+aether.x = + aether.x 1
+print aether.x "\n"
+if (not (eq aether.x 100)) :(gotime t)
+print "end\n"
+
+aether.x = 300
+t1 = timepoint void
+aether.x = - aether.x 1
+print aether.x "\n"
+if (> aether.x -1) :(gotime t1)
+print "end\n"

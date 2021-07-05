@@ -1,0 +1,31 @@
+use :base
+use :io
+
+array =  push (phemp (+ (arr 1 2 3 4) (arr 1 2 3 4)) 1 0) 1
+
+for :x array \
+ :(print x "\n")
+println (typeof array)
+print array "\n"
+
+ph = (phpush (phpush (phemp array 2 4) 9) "100")
+print ph "\n"
+print (len ph) "\n"
+
+for :x ph \
+ :(print x "\n")
+
+ q = input "enter: "
+ print (len q) "\n"
+ for :x q \
+  :(print x "\n")
+
+aether.x = 1
+until :(eq aether.x (len PH)) \
+  :(do \
+    :(println (get PH aether.x)) \
+    :(aether.x = + 1 aether.x))
+
+
+use :betterphantoms
+println (phantomrestore ph)

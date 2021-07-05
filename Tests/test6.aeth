@@ -1,0 +1,6 @@
+use :base
+use :io
+
+println (do \
+            :(set (* "aether." dimname ".num") 5) \
+            :(* 5 (do (* "aether." dimname ".num"))))

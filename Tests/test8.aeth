@@ -1,0 +1,16 @@
+use :base
+use :io
+use :fio
+use :convert
+
+dim w
+  f = open "testfile" "w"
+  fprintln f (num2int (str2num (input "Enter an integer: ")))
+  close f
+enddim w
+dimwait :w
+
+
+f = open "testfile" "r"
+println (FINPUT F)
+close f

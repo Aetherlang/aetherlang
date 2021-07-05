@@ -1,0 +1,19 @@
+use :base
+use :io
+use :juliacore :jl.
+use :convert
+
+X = JL.EVAL "AetherlangObject(1)"
+println x
+println "julia type: "   (jl.typeof x)
+println "aetherlang type: " (typeof x)
+
+dim Q
+  set (* "aether." dimname "i") 0
+  until :(eq 100 (do (* "aether." dimname "i"))) :(do \
+    :(println (JL.EVAL (* "AetherlangObject(" (string (do (* "aether." dimname "i"))) ")"))) \
+    :(set (* "aether." dimname "i") (+ (do (* "aether." dimname "i")) 1)))
+enddim Q
+
+dimwait :Q
+println *

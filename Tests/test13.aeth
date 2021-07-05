@@ -1,0 +1,17 @@
+use :base
+use :math
+use :io
+use :random
+use :time
+
+t0 = time void
+println (sin 0)
+println (cos 0)
+println (tan 0)
+println (cot 0)
+println (pow 4 0.5)
+println (ln eul)
+println (mean 1 2 3 4)
+println (c.rand void)
+println (- (time void) t0)
+println (- -300 300)

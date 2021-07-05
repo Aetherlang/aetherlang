@@ -1,0 +1,2 @@
+#!/bin/sh
+julia -t auto Interpreter.jl $@

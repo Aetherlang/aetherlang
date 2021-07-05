@@ -1,0 +1,8 @@
+use :base
+use :io
+
+function mul x = function _ y = * x y
+
+mul5 = mul 5
+
+println (mul5 5)

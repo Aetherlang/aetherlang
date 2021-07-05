@@ -1,0 +1,27 @@
+use :base
+use :io
+include "test5.aein"
+
+dim one
+aether.x = 0
+until :(eq aether.x 300) \
+    :(do \
+        :(print (typeof aether.x) " 1 ") \
+        :(println aether.x) \
+        :(aether.x = + aether.x 1))
+enddim one
+
+dim two
+aether.y = 0
+until :(eq aether.y 300) \
+    :(do \
+        :(print (typeof aether.y) " 2 ") \
+        :(println aether.y) \
+        :(aether.y = + aether.y 1))
+        aether.y = 0
+        until :(eq aether.y 300) \
+            :(do \
+                :(print (typeof aether.y) " 2 ") \
+                :(println aether.y) \
+                :(aether.y = + aether.y 1))
+enddim two

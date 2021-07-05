@@ -1,0 +1,15 @@
+use :base
+use :io
+
+dim sub
+  use :crystals :cr.
+  c = cr.remove (cr.add (cr.crystal 1 2 3 4) "hello") "hello"
+  println c
+  println (typeof c)
+  println (len c)
+  println (in? 1 c)
+  aether.c = c
+enddim sub
+
+dimwait :sub
+println aether.c

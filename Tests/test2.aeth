@@ -1,0 +1,11 @@
+use :base
+use :io
+
+set :kaki 90
+set :aether.puki void
+print (typeof (collect kaki 1 2 4)) "\n"
+print (collect kaki 1 2 4) "\n"
+
+@ this code prints "A" until a StackOverflowError is met
+@ function f x = (do :(print x) :(f x))
+@ f "A"

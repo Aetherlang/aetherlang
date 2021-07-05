@@ -1,0 +1,30 @@
+use :base
+
+aether.step = 2
+ritual
+  aether.step = + aether.step 1
+endrit
+use :io
+
+dim submain
+  dim subsubmain
+    test = "string"
+    print test "\n"
+    aether.omegasubsubmain = void
+  enddim subsubmain
+
+  dim submain2
+  enddim submain2
+
+  dimwait :subsubmain
+  @ print test @ error
+
+  aether.omega = "Hello, World"
+enddim submain
+
+
+
+aetherwait :omega
+println (aether.omega)
+println (typeof :aether.omega)
+println aether.step

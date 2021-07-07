@@ -1,4 +1,6 @@
 # Ætherlang
+<img src="Illustrations/logo.png" alt="logo" align="middle" width="200" height="200"/>
+
 Ætherlang is an interpreted constantly-typed functional programming language made with Julia to demonstrate the ether-dimensional programming paradigm. Note that although it is a demonstrational language, it was meant to be usable and engaging. Most libraries with core useful features are still under development, however it is already possible to use Aetherlang. See the website [under construction] for detailed information on the paradigm and tutorials.
 
 ## How to install

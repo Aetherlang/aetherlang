@@ -43,6 +43,7 @@ ether = Namespace()
 mainnamespace = Namespace(
     "void" => AetherlangObject(),
     "use" => AetherlangObject(lib_use),
+    "true" => AetherlangObject(1),
     "dimname" => AetherlangObject("main")
 )
 ## Main loop

@@ -8,7 +8,7 @@ function manifolds_manifold(line::Ref{UInt}, ns::Namespace, args...)::Aetherlang
 end
 
 # make manifold slicing
-function manifolds_section(line::Ref{UInt}, ns::Namespace, m::AetherlangObject, args...)::AetherlangObject
+function AE_section(line::Ref{UInt}, ns::Namespace, m::AetherlangObject{ManifoldsManifold}, args...)::AetherlangObject
     if length(args) % 2 != 0
         throw(AetherlangError("Wrong number of arguments given to manifolds.section"))
     end
@@ -23,7 +23,7 @@ function manifolds_section(line::Ref{UInt}, ns::Namespace, m::AetherlangObject, 
 end
 
 # overload from base
-function base_contains(line::Ref{UInt}, ns::Namespace, args::AetherlangObject, m::AetherlangObject{ManifoldsManifold})::AetherlangObject
+function AE_contains(line::Ref{UInt}, ns::Namespace, args::AetherlangObject, m::AetherlangObject{ManifoldsManifold})::AetherlangObject
     nns::Namespace = copy(ns)
     for i::Int in 1:length(m.dataref.vars)
         nns[m.dataref.vars[i]] = AetherlangObject(args.dataref[i])
@@ -33,5 +33,5 @@ end
 
 manifolds_namespace_modify = Namespace(
     "manifold" => AetherlangObject(manifolds_manifold),
-    "section" => AetherlangObject(manifolds_section)
+    "section" => AetherlangObject(AE_section)
 )

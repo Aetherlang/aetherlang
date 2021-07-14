@@ -11,8 +11,8 @@ const AETH_BUILTIN_TYPES = (
     timepoint="timepoint",
     void="void",
     callable="function",
-    collection="collection", # is only used to refer to a linear collection, such as tuple or array. define other types for other collections
-    phantom="phantomcollection" # is only used for phantoms on linear collections of type AETH_BUILTIN_TYPES.collection. define others types for phantoms on your structures
+    collection="array", # is only used to refer to a linear collection, such as tuple or array. define other types for other collections
+    phantom="phantomarray" # is only used for phantoms on linear collections of type AETH_BUILTIN_TYPES.collection. define others types for phantoms on your structures
 )
 
 ## AetherlangVoid type
@@ -33,7 +33,7 @@ function Base.show(io::IO, o::AetherlangObject)
         return print(io, o.dataref)
     end
     c = o.dataref
-    print(io, "collection (")
+    print(io, "(arr ")
     for i in 1:length(c)-1
         print(io, repr(c[i])*" ")
     end

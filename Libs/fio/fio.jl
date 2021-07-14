@@ -2,7 +2,7 @@
 
 const FILE_TYPE = "fio.file"
 
-function fio_open(line::Ref{UInt}, ns::Namespace, filename::AetherlangObject{String}, mode::AetherlangObject{String})::AetherlangObject
+function AE_open(line::Ref{UInt}, ns::Namespace, filename::AetherlangObject{String}, mode::AetherlangObject{String})::AetherlangObject
     try
         AetherlangObject{IO}(open(dirname(ARGS[1])*"/"*filename.dataref, mode.dataref), Ref(FILE_TYPE))
     catch
@@ -10,12 +10,12 @@ function fio_open(line::Ref{UInt}, ns::Namespace, filename::AetherlangObject{Str
     end
 end
 
-function fio_close(line::Ref{UInt}, ns::Namespace, file::AetherlangObject)::AetherlangObject
+function AE_close(line::Ref{UInt}, ns::Namespace, file::AetherlangObject)::AetherlangObject
     close(file.dataref)
     AetherlangObject()
 end
 
-function fio_fprint(line::Ref{UInt}, ns::Namespace, file::AetherlangObject, args...)::AetherlangObject
+function AE_fprint(line::Ref{UInt}, ns::Namespace, file::AetherlangObject, args...)::AetherlangObject
     try
         for i in 1:length(args)-1
             write(file.dataref, string(args[i])*' ')
@@ -26,7 +26,7 @@ function fio_fprint(line::Ref{UInt}, ns::Namespace, file::AetherlangObject, args
         throw(AetherlangError("Error when writing to file"))
     end
 end
-function fio_fprintln(line::Ref{UInt}, ns::Namespace, file::AetherlangObject, args...)::AetherlangObject
+function AE_fprintln(line::Ref{UInt}, ns::Namespace, file::AetherlangObject, args...)::AetherlangObject
     try
         for i in 1:length(args)-1
             write(file.dataref, string(args[i])*' ')
@@ -37,14 +37,14 @@ function fio_fprintln(line::Ref{UInt}, ns::Namespace, file::AetherlangObject, ar
         throw(AetherlangError("Error when writing to file"))
     end
 end
-function fio_finput(line::Ref{UInt}, ns::Namespace, file::AetherlangObject)::AetherlangObject
+function AE_finput(line::Ref{UInt}, ns::Namespace, file::AetherlangObject)::AetherlangObject
     AetherlangObject(readline(file.dataref))
 end
 
 fio_namespace_modify = Namespace(
-    "open" => AetherlangObject(fio_open),
-    "close" => AetherlangObject(fio_close),
-    "fprintln" => AetherlangObject(fio_fprintln),
-    "fprint" => AetherlangObject(fio_fprint),
-    "finput" => AetherlangObject(fio_finput)
+    "open" => AetherlangObject(AE_open),
+    "close" => AetherlangObject(AE_close),
+    "fprintln" => AetherlangObject(AE_fprintln),
+    "fprint" => AetherlangObject(AE_fprint),
+    "finput" => AetherlangObject(AE_finput)
 )

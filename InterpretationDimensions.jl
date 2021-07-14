@@ -17,5 +17,5 @@ function dimension_forward!(dim::Dimension)::Nothing
     catch e
        aetherlang_print_exception(e, lines[dim.current_line], dim.name) # also exits
     end
-    print() # I don't why but it just doesn't work without this print and exists with "ERROR: LoadError: MethodError: convert(::Type{Union{}}, ::UInt64) is ambiguous."
+    nothing
 end

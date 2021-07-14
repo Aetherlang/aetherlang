@@ -35,8 +35,17 @@ include("InterpretationDimensions.jl")
 include("LibUse.jl")
 include("Eval.jl")
 
-open(ARGS[1], "r") do file
-    global lines = [aetherlang_tokenize(l) for l in readcodelines(file)]
+if length(ARGS) < 1
+    println("No file provided for interpretation (ARGS[1] was empty). Aetherlang does not support interactive mode.")
+    exit()
+end
+try
+    open(ARGS[1], "r") do file
+        global lines = [aetherlang_tokenize(l) for l in readcodelines(file)]
+    end
+catch
+    println("Error when reading the file. Probably no such file or directory.")
+    exit()
 end
 
 ether = Namespace()

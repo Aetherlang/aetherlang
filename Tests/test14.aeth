@@ -1,0 +1,51 @@
+use :base
+use :io
+
+dim one
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+println 1
+enddim one
+
+dim two
+println 2
+println 2
+println 2
+println 2
+println 2
+println 2
+println 2
+println 2
+enddim two
+
+
+dim three
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+println 3
+enddim three

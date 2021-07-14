@@ -1,6 +1,7 @@
 ## Aetherlang type system
 include("AetherlangExceptions.jl")
 include("AetherlangPhantomCollection.jl")
+include("AetherlangArrays.jl")
 
 ## A named tuple for type references
 const AETH_BUILTIN_TYPES = (
@@ -29,15 +30,11 @@ struct AetherlangObject{T}
     type::Ref{String}
 end
 function Base.show(io::IO, o::AetherlangObject)
-    if o.type[] != AETH_BUILTIN_TYPES.collection
-        return print(io, o.dataref)
+    try
+        aetherlang_show(io, o.dataref)
+    catch
+        print(io, o.dataref)
     end
-    c = o.dataref
-    print(io, "(arr ")
-    for i in 1:length(c)-1
-        print(io, repr(c[i])*" ")
-    end
-    print(io, repr(c[end])*")")
 end
 
 AetherlangObject() = AetherlangObject{AetherlangVoid}(AetherlangVoid(), Ref(AETH_BUILTIN_TYPES.void))
@@ -60,6 +57,7 @@ function AetherlangObject(f::Function)::AetherlangObject{Function}
     """Wraps a julia function into an AetherlangObject of type callable. The function needs to take a namespace (Namespace) and a list of arguments (vector of AetherlangObject) and output a single AetherlangObject"""
     AetherlangObject{Function}(f, Ref(AETH_BUILTIN_TYPES.callable))
 end
+AetherlangObject(b::Bool) = b ? AetherlangObject{Int8}(Int8(1), Ref(AETH_BUILTIN_TYPES.number)) : AetherlangObject()
 
 ## Namespace definition
 Namespace = Dict{String, AetherlangObject{T} where T}
@@ -70,8 +68,8 @@ struct AetherlangTimepoint
     line::UInt
 end
 AetherlangObject(t::AetherlangTimepoint) = AetherlangObject{AetherlangTimepoint}(t, Ref(AETH_BUILTIN_TYPES.timepoint))
-function Base.show(io::IO, t::AetherlangTimepoint)
-    print(io, "timepoint at line $(t.line)")
+function aetherlang_show(io::IO, t::AetherlangTimepoint)
+    print(io, "(timepoint at line $(t.line))")
 end
 
 ## AetherlangFunction type
@@ -79,8 +77,8 @@ struct AetherlangFunction
     argnames::Vector{String}
     expr::Vector{Union{String, AetherlangObject}} # vector of tokens to evaluate
 end
-function Base.show(io::IO, f::AetherlangFunction)
-    print(io, "function of "*join(f.argnames))
+function aetherlang_show(io::IO, f::AetherlangFunction)
+    print(io, "(function _ "*join(f.argnames)*" = %body%)")
 end
 function aetherlang_call(f::AetherlangFunction, ns::Namespace, args::Vector{AetherlangObject}, line::Ref{UInt})::AetherlangObject
     global ether

@@ -1,0 +1,7 @@
+use :base
+use :io
+
+function f x = * x 2
+
+println f
+println (arr 1 2 3 4 5)

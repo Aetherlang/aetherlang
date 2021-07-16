@@ -1,0 +1,6 @@
+use :base
+use :io
+use :random
+
+println (choose (arr 1 2 3 4 5))
+println (shuffled (arr 1 2 3 4 5))

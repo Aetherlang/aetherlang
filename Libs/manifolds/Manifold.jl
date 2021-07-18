@@ -4,5 +4,5 @@ mutable struct ManifoldsManifold
 end
 
 function Base.show(io::IO, m::ManifoldsManifold)
-    print(io, "manifolds.manifold of "*join(m.vars, ' '))
+    print(io, "(manifolds.manifold of "*join(m.vars, ' ')*")")
 end

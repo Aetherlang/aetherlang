@@ -3,7 +3,7 @@ const MANIFOLD_TYPE = "manifolds.manifold"
 AetherlangObject(m::ManifoldsManifold) = AetherlangObject{ManifoldsManifold}(m, Ref{String}(MANIFOLD_TYPE))
 
 function manifolds_manifold(line::Ref{UInt}, ns::Namespace, args...)::AetherlangObject
-    exp::Vector{Token} = Token[(haskey(ns, t) ? ns[t] : t) for t::String in aetherlang_tokenize(args[end].dataref[2:end-1])]
+    exp::Vector{Token} = Token[(haskey(ns, t) ? ns[t] : t) for t in aetherlang_tokenize(args[end].dataref[2:end-1])]
     AetherlangObject(ManifoldsManifold([args[argi].dataref for argi in 1:(length(args)-1)], exp))
 end
 

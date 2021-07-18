@@ -1,0 +1,6 @@
+use :base
+use :io
+use :math
+
+println (min 5 1 2 3 1 5 0)
+println (max 5 1 2 3 1 6 0)

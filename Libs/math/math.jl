@@ -13,6 +13,8 @@ math_namespace_modify = Namespace(
     "exp" => AetherlangObject((line::Ref{UInt}, ns::Namespace, arg::AetherlangObject)->AetherlangObject(exp(arg.dataref)), Ref(AETH_BUILTIN_TYPES.callable)),
     "ln" => AetherlangObject((line::Ref{UInt}, ns::Namespace, arg::AetherlangObject)->AetherlangObject(log(arg.dataref)), Ref(AETH_BUILTIN_TYPES.callable)),
     "log" => AetherlangObject((line::Ref{UInt}, ns::Namespace, arg1::AetherlangObject, arg2::AetherlangObject)->AetherlangObject(log(arg1.dataref, arg2.dataref)), Ref(AETH_BUILTIN_TYPES.callable)),
-    "lg" => AetherlangObject((line::Ref{UInt}, ns::Namespace, arg::AetherlangObject)->AetherlangObject(log10(arg.dataref)), Ref(AETH_BUILTIN_TYPES.callable))
+    "lg" => AetherlangObject((line::Ref{UInt}, ns::Namespace, arg::AetherlangObject)->AetherlangObject(log10(arg.dataref)), Ref(AETH_BUILTIN_TYPES.callable)),
+    "min" => AetherlangObject((line::Ref{UInt}, ns::Namespace, args...)->AetherlangObject(min([arg.dataref for arg in args]...)), Ref(AETH_BUILTIN_TYPES.callable)),
+    "max" => AetherlangObject((line::Ref{UInt}, ns::Namespace, args...)->AetherlangObject(max([arg.dataref for arg in args]...)), Ref(AETH_BUILTIN_TYPES.callable))
 )
 math_namespace_modify["%"] = math_namespace_modify["mod"]

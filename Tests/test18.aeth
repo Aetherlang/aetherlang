@@ -1,0 +1,6 @@
+use :base
+use :io
+use :time
+
+println (time void)
+println (c.time 0)

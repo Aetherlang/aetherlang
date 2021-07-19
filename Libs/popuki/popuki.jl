@@ -1,3 +1,3 @@
 # POPular Utils KIt
 
-# filter, map, reduce, lisp, unlisp
+# filter, map, reduce, [ a b c d ]

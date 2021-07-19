@@ -4,11 +4,11 @@ function random_сsrand(line::Ref{UInt}, ns::Namespace, seed::AetherlangObject):
 end
 
 function AE_choose(line::Ref{UInt}, ns::Namespace, arr::AetherlangObject)::AetherlangObject
-    AetherlangObject(rand(arr.dataref))
+    AetherlangObject(arr.dataref[rand(1:length(arr.dataref))])
 end
 
 function AE_shuffled(line::Ref{UInt}, ns::Namespace, arr::AetherlangObject)::AetherlangObject
-    a = copy(arr.dataref)
+    a = [arr.dataref[i] for i in 1:length(arr.dataref)]
     for i in 1:length(a)
         q::Int = rand(1:length(a))
         a[i], a[q] = a[q], a[i]

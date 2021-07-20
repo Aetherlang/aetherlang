@@ -1,6 +1,8 @@
 use :base
 use :io
-use :time
-
-println (time void)
-println (c.time 0)
+use :convert
+function f x y = / (* x y) (+ x y)
+println (string println)
+println (string f) @ printing the function itself
+println (f 5 6) @ printing the result of the function called with 5 and 6 as its arguments
+println (f 1.2 3.4)

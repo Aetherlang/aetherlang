@@ -54,6 +54,8 @@ function AetherlangObject(n::T where T<:Number)
     AetherlangObject{typeof(n)}(n, Ref(AETH_BUILTIN_TYPES.number))
 end
 AetherlangObject(b::Bool) = b ? AetherlangObject{Int8}(Int8(1), Ref(AETH_BUILTIN_TYPES.number)) : AetherlangObject()
+AetherlangObject(c::Char) = AetherlangObject{String}(string(c), Ref(AETH_BUILTIN_TYPES.string))
+
 
 ## Namespace definition
 Namespace = Dict{String, AetherlangObject{T} where T}

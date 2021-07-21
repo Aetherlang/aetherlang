@@ -1,0 +1,17 @@
+use :base
+use :io
+use :popuki
+
+
+println (arrslice (arr 1 2 3 4 5 6 7) 2 :end)
+a = arrslice (arr 1 2 3 4 5 6 7) 2 6
+println a
+println (arrslicerestore a)
+println (arrslicebounds a)
+println (filter (lambda :x :(not (eq x "0"))) "0000010101010")
+println ([ 1 2 3 ])
+println (map (lambda :x :(* x 2)) (arr 1 2 3 4 5 6))
+println (reduce (lambda :x :y :(+ x y)) (arr 1 2 3 4))
+println []
+println (eq (phpush (arr 1 2 3) 4) (arr 1 2 3 4))
+println (eleq (phpush (arr 1 2 3) 4) (arr 1 2 3 4))

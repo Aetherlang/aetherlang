@@ -17,7 +17,7 @@ or
 where `aetherlangrun` is simply a shell script located in the root of the source folder. Make sure you have a compatible terminal and a permission to execute this file.
 
 ## Versions
-You can download the latest version from the "Releases" section. And please, only download Aetherlang from there. The repository's version is neither v0.1 nor v0.2, but rather it is somewhere in between, in the void of undocumented versions. That means, the code from the repository has a somewhat stable support for v0.1 but everything else is beyond it. Moreover, when Aetherlang will get more or less Julia-independent, the binaries will be available in the same "Releases" section. There's also "Projects" section in this repository where plans for future versions are shared.
+You can download the latest version from the "Releases" section. And please, only download Aetherlang from there. The repository code's version is somewhere in the void of undocumented versions. That means, the code from the repository has a somewhat stable support for v0.1 but everything else is beyond it. Moreover, when Aetherlang will get more or less Julia-independent, the binaries will be available in the same "Releases" section. There's also "Projects" section in this repository where plans for future versions are shared.
 
 ## Hello, World!
 A simple hello world program in current version of Aetherlang would look like this:

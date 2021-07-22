@@ -7,8 +7,5 @@ struct CrystalsPhantomCrystal{T}
 end
 function Base.show(io::IO, cr::CrystalsPhantomCrystal{T}) where T
     s::Set{T} = union(setdiff(cr.data, cr.rm), cr.add)
-    print(io, "crystals.phantomcrystal: ")
-    for x in s
-        print(io, repr(x)*' ')
-    end
+    print(io, "(crystals.phantomcrystal "*join([aetherlang_repr(x) for x in s], ' ')*")")
 end

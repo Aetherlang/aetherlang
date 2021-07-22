@@ -2,10 +2,7 @@ struct CrystalsCrystal{T}
     data::Set{T}
 end
 function Base.show(io::IO, cr::CrystalsCrystal)
-    print(io, "crystals.crystal: ")
-    for x in cr.data
-        print(io, repr(x)*' ')
-    end
+    print(io, "(crystals.crystal "*join([aetherlang_repr(x) for x in cr.data], ' ')*")")
 end
 
 # overload indexin to make `contains?` from base lib work

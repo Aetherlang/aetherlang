@@ -1,7 +1,10 @@
-## Aetherlang type system
+### Aetherlang type system
+
+## Type-specific tools
 include("AetherlangExceptions.jl")
 include("AetherlangPhantomCollection.jl")
 include("AetherlangArrays.jl")
+include("AetherlangStrings.jl")
 
 ## A named tuple for type references
 const AETH_BUILTIN_TYPES = (

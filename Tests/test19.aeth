@@ -1,10 +1,14 @@
 use :base
 use :io
+@ popuki & betterstrings test
 use :popuki
+use :betterstrings
 
 
+println (digit? "12345678")
+println (charemp "ccc" 2 "d")
 println (arrslice (arr 1 2 3 4 5 6 7) 2 :end)
-a = arrslice (arr 1 2 3 4 5 6 7) 2 6
+a = arrslice (arr 1 2 3 "4" 5 6 7) 2 6
 println a
 println (arrslicerestore a)
 println (arrslicebounds a)
@@ -15,3 +19,7 @@ println (reduce (lambda :x :y :(+ x y)) (arr 1 2 3 4))
 println []
 println (eq (phpush (arr 1 2 3) 4) (arr 1 2 3 4))
 println (eleq (phpush (arr 1 2 3) 4) (arr 1 2 3 4))
+println (arrslice "12345678" 2 7)
+println (in? "4" "12345678")
+println (in? "4" (arrslice "12345678" 2 7))
+println (arr 1 2 (arr 1 2 3) 3)

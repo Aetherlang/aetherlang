@@ -1,5 +1,5 @@
 struct ArrSlice
-    arr::Vector
+    arr
     beg::Int
     fin::Int
 end
@@ -7,7 +7,7 @@ end
 # overload indexin to make `contains?` from base lib work
 function Base.indexin(v, s::ArrSlice)::Vector{Union{Nothing, Int64}}
     i = indexin(v, s.arr)[1]
-    (i == nothing || i < s.beg || i > s.fin) ? [nothing] : [i]
+    (i == nothing || i < s.beg || i > s.fin) ? [nothing] : [i-s.beg+1]
 end
 # overload length to make `len` from base lib work
 Base.length(s::ArrSlice)::Int = s.fin-s.beg+1
@@ -19,5 +19,5 @@ function Base.getindex(s::ArrSlice, indx::Int)
 end
 
 function aetherlang_show(io::IO, v::ArrSlice)
-    print(io, "(arrslice "*join([string(v[i]) for i in 1:length(v)], ' ')*")")
+    print(io, "(popuki.arrslice "*join([aetherlang_repr(v[i]) for i in 1:length(v)], ' ')*")")
 end

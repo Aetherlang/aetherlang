@@ -18,10 +18,6 @@ Base.length(p::AetherlangPhantomCollection) = p.length
 
 Base.copy(p::AetherlangPhantomCollection) = AetherlangPhantomCollection(p.ref, copy(p.addindx), p.length)
 
-function Base.show(io::IO, p::AetherlangPhantomCollection)
-    print(io, "(phantomarray ")
-    for i in 1:p.length-1
-        print(io, repr(p[i])*" ")
-    end
-    print(io, repr(p[p.length])*")")
+function aetherlang_show(io::IO, v::AetherlangPhantomCollection)
+    print(io, "(phantomarray "*join([aetherlang_repr(v[i]) for i in 1:length(v)], ' ')*")")
 end

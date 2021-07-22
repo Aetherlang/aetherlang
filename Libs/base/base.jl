@@ -241,7 +241,8 @@ base_namespace_modify = Namespace(
     "+" => AetherlangObject(AE_plus),
     "-" => AetherlangObject(AE_minus),
     "*" => AetherlangObject(AE_prod),
-    "/" => AetherlangObject(AE_div)
+    "/" => AetherlangObject(AE_div),
+    "exit" => AetherlangObject((line::Ref{UInt}, ns::Namespace, dummy::AetherlangObject) -> exit())
 )
 # duplicates
 base_namespace_modify["arr"] = base_namespace_modify["array"] = base_namespace_modify["collect"]

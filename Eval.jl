@@ -80,7 +80,7 @@ function aetherlang_eval!(tokens::Vector{Token}, namespace::Namespace, line::Ref
             ether[fname[8:end]] = f
         else
             if haskey(namespace, fname)
-                throw(AetherlangError("Trying to redefine a local dimensional constant `$fname` of type "*namespace[tokens[1]].type[]))
+                throw(AetherlangError("Trying to redefine a local dimensional constant `$fname` of type "*namespace[fname].type[]))
             end
             namespace[fname] = f
         end

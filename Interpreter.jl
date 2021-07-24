@@ -43,8 +43,8 @@ try
     open(ARGS[1], "r") do file
         global lines = [aetherlang_tokenize(l) for l in readcodelines(file)]
     end
-catch
-    println("Error when reading the file. Probably no such file or directory.")
+catch e
+    aetherlang_print_exception(e, ["__"], "__")
     exit()
 end
 

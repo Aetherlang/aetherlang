@@ -8,6 +8,6 @@ struct AetherlangError <: AetherlangException
 end
 
 function aetherlang_print_exception(e, line::Vector{String}, dimname::String)
-    print("\n\n"*repr(e)*"\nAETHERLANG ERROR AT LINE:\n\t"*join(line, ' ')*"\n(COMMENTS REMOVED)\nIN DIMENSION "*dimname*'\n')
+    print("\n\n"*(typeof(e) <: AetherlangException ? e.message : repr(e))*"\nAETHERLANG ERROR AT LINE:\n\t"*join(line, ' ')*"\n(COMMENTS REMOVED)\nIN DIMENSION "*dimname*'\n')
     exit()
 end

@@ -24,7 +24,7 @@ function aetherlang_tokenize(code::String)::Vector{String}
         special = c == '\\' && quotes
     end
     if quotes || special || p_count != 0
-        throw(AetherlangError("Missing closing character"))
+        throw(AetherlangError("Missing closing character. Use '\\' when splitting a line into two:\n(F X X \\\n\tX X)"))
     end
     if token != ""
         push!(tokens, token)

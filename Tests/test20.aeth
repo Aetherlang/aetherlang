@@ -1,0 +1,28 @@
+use :base
+use :io
+use :random
+use :math
+
+aether.y = 0
+dim one
+  t = timepoint void
+  aether.y = + 1 aether.y
+  if (eq? 0 (% (c.rand void) 2)) :(finish void)
+  println "dim one alive for" aether.y "iterations"
+  gotime t
+enddim one
+
+println "hello from dim main!!!"
+
+aether.x = 0
+ritual
+  aether.x = + 1 aether.x
+  if (eq? 0 (% (c.rand void) 2)) :(do :(println "ritual stopped after" aether.x "iterations") :(finish void))
+endrit
+
+println "hello again from dim main!!!"
+println "hello again from dim main!!!"
+println "hello again from dim main!!!"
+println "hello again from dim main!!!"
+println "hello again from dim main!!!"
+println "hello again from dim main!!!"

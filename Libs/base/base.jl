@@ -72,7 +72,7 @@ function AE_gotime(line::Ref{UInt}, ns::Namespace, timepoint::AetherlangObject{A
             pop!(ns, name)
         end
     end
-    line[] = timepoint.dataref.line
+    line[] = timepoint.dataref.line-1
     AetherlangObject()
 end
 function AE_exists(line::Ref{UInt}, ns::Namespace, arg::AetherlangObject)::AetherlangObject

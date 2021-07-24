@@ -1,17 +1,11 @@
 ## io library
 function io_print(line::Ref{UInt}, ns::Namespace, args...)::AetherlangObject
-    for i in 1:length(args)-1
-        print(args[i], " ")
-    end
-    print(args[end])
+    print(join([string(arg) for arg in args], ' '))
     AetherlangObject()
 end
 
 function io_println(line::Ref{UInt}, ns::Namespace, args...)::AetherlangObject
-    for i in 1:length(args)-1
-        print(args[i], " ")
-    end
-    println(args[end])
+    io_print(line, ns, args..., '\n')
     AetherlangObject()
 end
 

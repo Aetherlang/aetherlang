@@ -59,23 +59,31 @@ mainnamespace = Namespace(
 dimensions = Dimension[]
 rituals    = Dimension[]
 push!(dimensions, Dimension(1, length(lines), mainnamespace, "main"))
-while length(dimensions) > 0
-    global dimensions, rituals
-    @sync begin
-        for i in 1:length(dimensions)
-            i > length(dimensions) && break
-            if dimensions[i].current_line <= dimensions[i].endline
-                @async dimension_forward!(dimensions[i])
-            else
-                deleteat!(dimensions, i)
+@async while length(dimensions)>0
+    print("") # io crutchfix??
+    for i in 1:length(rituals)
+        i > length(rituals) && break
+        if rituals[i].tofinish
+            deleteat!(rituals, i)
+        else
+            if !rituals[i].busy
+                rituals[i].busy = true
+                @async dimension_forward!(rituals[i])
             end
         end
-        for i in 1:length(rituals)
-            i > length(rituals) && break
-            if rituals[i].current_line <= rituals[i].endline
-                @async dimension_forward!(rituals[i])
-            else
-                rituals[i].current_line = rituals[i].startline
+    end
+end
+while length(dimensions) > 0
+    print("") # io crutchfix??
+    global dimensions, rituals
+    for i in 1:length(dimensions)
+        i > length(dimensions) && break
+        if dimensions[i].tofinish
+            deleteat!(dimensions, i)
+        else
+            if !dimensions[i].busy
+                dimensions[i].busy = true
+                @async dimension_forward!(dimensions[i])
             end
         end
     end

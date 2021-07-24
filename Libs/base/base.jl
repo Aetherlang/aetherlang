@@ -34,6 +34,10 @@ function AE_dimwait(line::Ref{UInt}, ns::Namespace, dimname::AetherlangObject)::
     end
     AetherlangObject()
 end
+function AE_finish(line::Ref{UInt}, ns::Namespace, dummy::AetherlangObject)::AetherlangObject
+    line[] = 0
+    AetherlangObject()
+end
 function AE_do(line::Ref{UInt}, ns::Namespace, args...)::AetherlangObject
     o::AetherlangObject = AetherlangObject()
     nns::Namespace = copy(ns)
@@ -210,6 +214,7 @@ base_namespace_modify = Namespace(
     "aetherclear" => AetherlangObject(AE_aetherclear),
     "aethersize" => AetherlangObject(AE_aethersize),
     "dimwait" => AetherlangObject(AE_dimwait),
+    "finish" => AetherlangObject(AE_finish),
     "include" => AetherlangObject(AE_include),
     "set" => AetherlangObject(AE_set),
     "lambda" => AetherlangObject(AE_lambda),
@@ -224,7 +229,7 @@ base_namespace_modify = Namespace(
     "for" => AetherlangObject(AE_for),
     "equal?" => AetherlangObject(AE_eq),
     "not" => AetherlangObject(AE_not),
-    "or" => AetherlangObject(AE_not),
+    "or" => AetherlangObject(AE_or),
     "collect" => AetherlangObject(AE_collect),
     "len" => AetherlangObject(AE_len),
     "get" => AetherlangObject(AE_get),

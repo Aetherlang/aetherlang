@@ -1,9 +1,0 @@
-@ included file, not runnable. run test5.aeth instead
-
-count300 = lambda :_ :(do \
-    :(aether.x = 0) \
-    :(until :(eq aether.x 300) \
-        :(do \
-            :(print (typeof aether.x) " ") \
-            :(println aether.x) \
-            :(aether.x = + aether.x 1))))

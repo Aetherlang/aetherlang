@@ -16,7 +16,7 @@ function aetherlang_eval!(tokens::Vector{Token}, namespace::Namespace, line::Ref
                     throw(AetherlangError("Line `endrit` not found"))
                 end
             end
-            push!(rituals, Dimension(line[]+1, UInt(endrit-1), setindex!(copy(namespace), AetherlangObject(ritname), "ritname"), ritname))
+            push!(rituals, Ritual(line[]+1, UInt(endrit-1), copy(namespace), ritname))
             line[] = endrit
         elseif token[1] == '(' && token[end] == ')'
             # if one token and parentheses, remove them and re-eval

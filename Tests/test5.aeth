@@ -1,6 +1,5 @@
 use :base
 use :io
-include "test5.aein"
 
 dim one
 aether.x = 0

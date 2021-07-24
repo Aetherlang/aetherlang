@@ -34,8 +34,8 @@ function AE_dimwait(line::Ref{UInt}, ns::Namespace, dimname::AetherlangObject)::
     end
     AetherlangObject()
 end
-function AE_finish(line::Ref{UInt}, ns::Namespace, dummy::AetherlangObject)::AetherlangObject
-    line[] = 0
+function AE_tofinish(line::Ref{UInt}, ns::Namespace, dummy::AetherlangObject)::AetherlangObject
+    push!(tofinish, ns["dimname"].dataref)
     AetherlangObject()
 end
 function AE_do(line::Ref{UInt}, ns::Namespace, args...)::AetherlangObject
@@ -67,9 +67,16 @@ function AE_for(line::Ref{UInt}, ns::Namespace, argname::AetherlangObject, bound
     return o
 end
 function AE_gotime(line::Ref{UInt}, ns::Namespace, timepoint::AetherlangObject{AetherlangTimepoint})::AetherlangObject
-    for (name, obj) in ns
+    dimns::Namespace = ns
+    for d in dimensions
+        if d.name == ns["dimname"].dataref
+            dimns = d.namespace
+            break
+        end
+    end
+    for (name, obj) in dimns
         if !(name in timepoint.dataref.names)
-            pop!(ns, name)
+            pop!(dimns, name)
         end
     end
     line[] = timepoint.dataref.line-1
@@ -214,7 +221,7 @@ base_namespace_modify = Namespace(
     "aetherclear" => AetherlangObject(AE_aetherclear),
     "aethersize" => AetherlangObject(AE_aethersize),
     "dimwait" => AetherlangObject(AE_dimwait),
-    "finish" => AetherlangObject(AE_finish),
+    "tofinish" => AetherlangObject(AE_tofinish),
     "include" => AetherlangObject(AE_include),
     "set" => AetherlangObject(AE_set),
     "lambda" => AetherlangObject(AE_lambda),

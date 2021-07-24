@@ -55,7 +55,8 @@ mainnamespace = Namespace(
     "true" => AetherlangObject(1),
     "dimname" => AetherlangObject("main")
 )
-## Main loop
+## Main loop (Dimension execution)
+tofinish   = Set{String}() # contains names of dimensions and rituals to finish
 dimensions = Dimension[]
 rituals    = Dimension[]
 push!(dimensions, Dimension(1, length(lines), mainnamespace, "main"))
@@ -63,7 +64,8 @@ push!(dimensions, Dimension(1, length(lines), mainnamespace, "main"))
     print("") # io crutchfix??
     for i in 1:length(rituals)
         i > length(rituals) && break
-        if rituals[i].tofinish
+        if rituals[i].name in tofinish
+            pop!(tofinish, rituals[i].name)
             deleteat!(rituals, i)
         else
             if !rituals[i].busy
@@ -75,10 +77,11 @@ push!(dimensions, Dimension(1, length(lines), mainnamespace, "main"))
 end
 while length(dimensions) > 0
     print("") # io crutchfix??
-    global dimensions, rituals
+    global dimensions
     for i in 1:length(dimensions)
         i > length(dimensions) && break
-        if dimensions[i].tofinish
+        if dimensions[i].name in tofinish
+            pop!(tofinish, dimensions[i].name)
             deleteat!(dimensions, i)
         else
             if !dimensions[i].busy

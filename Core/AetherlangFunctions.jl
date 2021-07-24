@@ -35,7 +35,7 @@ function aetherlang_call(f::Function, ns::Namespace, args::Vector{AetherlangObje
         if typeof(e) <: AetherlangException
             throw(e)
         else
-            throw(AetherlangError("Bad call of built-in function"))
+            throw(AetherlangError("Bad call of built-in function: "*string(e)))
         end
     end
 end

@@ -6,10 +6,11 @@ use :math
 aether.y = 0
 dim one
   t = timepoint void
+  println t
   aether.y = + 1 aether.y
-  if (eq? 0 (% (c.rand void) 2)) :(finish void)
+  if (eq? 0 (% (c.rand void) 2)) :(tofinish void)
   println "dim one alive for" aether.y "iterations"
-  gotime t
+  if true :(gotime t)
 enddim one
 
 println "hello from dim main!!!"
@@ -17,7 +18,7 @@ println "hello from dim main!!!"
 aether.x = 0
 ritual
   aether.x = + 1 aether.x
-  if (eq? 0 (% (c.rand void) 2)) :(do :(println "ritual stopped after" aether.x "iterations") :(finish void))
+  if (eq? 0 (% (c.rand void) 2)) :(do :(println "ritual stopped after" aether.x "iterations") :(tofinish dimname))
 endrit
 
 println "hello again from dim main!!!"

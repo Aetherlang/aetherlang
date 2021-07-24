@@ -6,12 +6,11 @@ mutable struct Dimension
     endline::UInt
     namespace::Namespace
     name::String
-    tofinish::Bool
     busy::Bool
     isritual::Bool
 end
-Dimension(cl::I where I<:Integer, el::I where I<:Integer, ns::Namespace, name::String) = Dimension(cl, cl, el, ns, name, false, false, false)
-Ritual(cl::I where I<:Integer, el::I where I<:Integer, ns::Namespace, name::String) = Dimension(cl, cl, el, ns, name, false, false, true)
+Dimension(cl::I where I<:Integer, el::I where I<:Integer, ns::Namespace, name::String) = Dimension(cl, cl, el, ns, name, false, false)
+Ritual(cl::I where I<:Integer, el::I where I<:Integer, ns::Namespace, name::String) = Dimension(cl, cl, el, ns, name, false, true)
 
 function dimension_forward!(dim::Dimension)::Nothing
     try
@@ -21,7 +20,8 @@ function dimension_forward!(dim::Dimension)::Nothing
         if (dim.current_line > dim.endline && dim.isritual)
             dim.current_line = dim.startline;
         elseif dim.current_line > dim.endline || dim.current_line < dim.startline
-            dim.tofinish = true;
+            global tofinish
+            push!(tofinish, dim.name)
         end
     catch e
         aetherlang_print_exception(e, lines[dim.current_line], dim.name) # also exits

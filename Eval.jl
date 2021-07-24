@@ -8,7 +8,7 @@ function aetherlang_eval!(tokens::Vector{Token}, namespace::Namespace, line::Ref
         token::String = tokens[1]
         # ritual/endrit evaluation
         if token == "ritual"
-            ritname::String = "rit#"*string(line[])
+            ritname::String = "RIT#"*string(line[])
             endrit::UInt = line[]
             while !("endrit" == lines[endrit][1])
                 endrit += 1
@@ -16,7 +16,7 @@ function aetherlang_eval!(tokens::Vector{Token}, namespace::Namespace, line::Ref
                     throw(AetherlangError("Line `endrit` not found"))
                 end
             end
-            push!(rituals, Ritual(line[]+1, UInt(endrit-1), copy(namespace), ritname))
+            push!(rituals, Ritual(line[]+1, UInt(endrit-1), setindex!(copy(namespace), AetherlangObject(ritname), "dimname"), ritname))
             line[] = endrit
         elseif token[1] == '(' && token[end] == ')'
             # if one token and parentheses, remove them and re-eval

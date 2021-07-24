@@ -15,6 +15,8 @@ function betterstrings_charemplace(line::Ref{UInt}, ns::Namespace, str::Aetherla
     end
     AetherlangObject(str.dataref[1:indx.dataref-1]*char.dataref*str.dataref[indx.dataref+1:end])
 end
+betterstrings_tolowercase(line::Ref{UInt}, ns::Namespace, str::AetherlangObject)::AetherlangObject = AetherlangObject(lowercase(str.dataref))
+betterstrings_touppercase(line::Ref{UInt}, ns::Namespace, str::AetherlangObject)::AetherlangObject = AetherlangObject(uppercase(str.dataref))
 function betterstrings_digit(line::Ref{UInt}, ns::Namespace, str::AetherlangObject)::AetherlangObject
     for c in str.dataref
         if !isdigit(c)
@@ -52,6 +54,8 @@ betterstrings_namespace_modify = Namespace(
     "strjoin" => AetherlangObject(betterstrings_strjoin),
     "strsplit" => AetherlangObject(betterstrings_strsplit),
     "charemplace" => AetherlangObject(betterstrings_charemplace),
+    "tolowercase" => AetherlangObject(betterstrings_tolowercase),
+    "touppercase" => AetherlangObject(betterstrings_touppercase),
     "digit?" => AetherlangObject(betterstrings_digit),
     "punct?" => AetherlangObject(betterstrings_punct),
     "printable?" => AetherlangObject(betterstrings_printable),

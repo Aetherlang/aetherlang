@@ -2,7 +2,7 @@ function betterstrings_strjoin(line::Ref{UInt}, ns::Namespace, arr::AetherlangOb
     AetherlangObject(join([arr.dataref[i] for i in 1:length(arr.dataref)], sep.dataref))
 end
 function betterstrings_strsplit(line::Ref{UInt}, ns::Namespace, str::AetherlangObject, sep::AetherlangObject=AetherlangObject(" "))::AetherlangObject
-    AetherlangObject(split(arr.dataref, sep.dataref))
+    AetherlangObject(split(str.dataref, sep.dataref))
 end
 function betterstrings_charemplace(line::Ref{UInt}, ns::Namespace, str::AetherlangObject, indx::AetherlangObject, char::AetherlangObject)::AetherlangObject
     if length(char.dataref) > 1

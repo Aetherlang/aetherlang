@@ -2,20 +2,20 @@ use :base
 use :io
 
 dim u
-aether.x = 0
-t = timepoint void
-aether.x = + aether.x 1
-print aether.x "\n"
-println t
-x = "one-use thing"
-if (eq aether.x 100) :(tofinish void)
-if true :(gotime t)
-print "end\n"
+  aether.x = 0
+  t = timepoint void
+  aether.x = + aether.x 1
+  print aether.x "\n"
+  println t
+  x = "one-use thing"
+  if (eq aether.x 100) :(tofinish void)
+  gotime t
+  print "end\n"
 enddim u
 
 aether.y = 300
 t1 = timepoint void
 aether.y = - aether.y 1
 print aether.y "\n"
-if (> aether.y -1) :(gotime t1)
+if true :(if (> aether.y -1) :(gotime t1))
 print "end\n"

@@ -4,13 +4,25 @@ include("ArrSlices.jl")
 const ENDLISTTOKEN = "popuki.endlisttoken"
 
 function AE_filter(line::Ref{UInt}, ns::Namespace, predicate::AetherlangObject, collection::AetherlangObject)::AetherlangObject
-    AetherlangObject(filter((x -> aetherlang_call(predicate.dataref, ns, AetherlangObject[AetherlangObject(x)], line).type[] === AETH_BUILTIN_TYPES.void ? false : true), collection.dataref))
+    arr = []
+    for i in 1:length(collection.dataref)
+        aetherlang_call(predicate.dataref, ns, AetherlangObject[AetherlangObject(collection.dataref[i])], line).type[] !== AETH_BUILTIN_TYPES.void && push!(arr, collection.dataref[i])
+    end
+    AetherlangObject(arr)
 end
 function AE_map(line::Ref{UInt}, ns::Namespace, f::AetherlangObject, collection::AetherlangObject)::AetherlangObject
-    AetherlangObject(map((x -> aetherlang_call(f.dataref, ns, AetherlangObject[AetherlangObject(x)], line).dataref), collection.dataref))
+    arr = []
+    for i in 1:length(collection.dataref)
+        push!(arr, aetherlang_call(f.dataref, ns, AetherlangObject[AetherlangObject(collection.dataref[i])], line).dataref)
+    end
+    AetherlangObject(arr)
 end
 function AE_reduce(line::Ref{UInt}, ns::Namespace, f::AetherlangObject, collection::AetherlangObject)::AetherlangObject
-    AetherlangObject(reduce(((x, y) -> aetherlang_call(f.dataref, ns, AetherlangObject[AetherlangObject(x), AetherlangObject(y)], line).dataref), collection.dataref))
+    x = collection.dataref[1]
+    for i in 1:length(collection.dataref)
+        x = aetherlang_call(f.dataref, ns, AetherlangObject[AetherlangObject(x), AetherlangObject(collection.dataref[i])], line).dataref
+    end
+    AetherlangObject(x)
 end
 function AE_startlist(line::Ref{UInt}, ns::Namespace, args...)::AetherlangObject
     if args[end].type[] !== ENDLISTTOKEN
@@ -23,12 +35,21 @@ function AE_arrslice(line::Ref{UInt}, ns::Namespace, arr::AetherlangObject, ind1
     if ind2.dataref == "end"
         ind2 = AetherlangObject(length(arr.dataref))
     end
+    if ind1.dataref == 1 && ind2.dataref == length(arr.dataref)
+        return arr
+    end
     AetherlangObject(ArrSlice(arr.dataref, ind1.dataref, ind2.dataref), Ref(AETH_BUILTIN_TYPES.collection))
 end
 function AE_arrslicerestore(line::Ref{UInt}, ns::Namespace, arrs::AetherlangObject)::AetherlangObject
-    AetherlangObject(arrs.dataref.arr)
+    if typeof(arrs.dataref) == ArrSlice
+        return AetherlangObject(arrs.dataref.arr)
+    end
+    arrs
 end
 function AE_arrslicebounds(line::Ref{UInt}, ns::Namespace, arrs::AetherlangObject)::AetherlangObject
+    if typeof(arrs.dataref) != ArrSlice
+        return AetherlangObject()
+    end
     AetherlangObject([arrs.dataref.beg, arrs.dataref.fin])
 end
 function AE_eleq(line::Ref{UInt}, ns::Namespace, coll1::AetherlangObject, coll2::AetherlangObject)::AetherlangObject
@@ -57,5 +78,6 @@ popuki_namespace_modify = Namespace(
     "arrslice" => AetherlangObject(AE_arrslice),
     "arrslicerestore" => AetherlangObject(AE_arrslicerestore),
     "arrslicebounds" => AetherlangObject(AE_arrslicebounds),
-    "eleq" => AetherlangObject(AE_eleq)
+    "elementsequal?" => AetherlangObject(AE_eleq)
 )
+popuki_namespace_modify["eleq?"] = popuki_namespace_modify["elementsequal?"]
